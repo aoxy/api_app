@@ -31,3 +31,18 @@ def verify_token(token):
     username = db.query_login(data["username"])
     return username
 
+
+def login_required(view_func):
+    @functools.wraps(view_func)
+    def verify_token(*args, **kwargs):
+        try:
+            token = request.args.get('token')
+        except Exception:
+            return jsonify(msg='缺少参数token！')
+        s = Serializer(current_app.config["SECRET_KEY"])
+        try:
+            s.loads(token)
+        except Exception:
+            return jsonify(msg="登录已过期！")
+        return view_func(*args, **kwargs)
+    return verify_token
