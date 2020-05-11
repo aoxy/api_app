@@ -1,4 +1,5 @@
 import functools
+import re
 from flask import request, jsonify, current_app
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 
@@ -46,3 +47,18 @@ def login_required(view_func):
             return jsonify(msg="登录已过期！")
         return view_func(*args, **kwargs)
     return verify_token
+
+
+def festival(date):
+    if re.match(r"\d{4}[-/]\d{2}[-/]\d{2}",date):
+        if date[-5:] == "01-01":
+            festival = "元旦"
+        elif date[-5:] == "12-25":
+            festival = "圣诞节"
+        elif date[-5:] == "10-01":
+            festival = "国庆节"
+        else:
+            festival = ""
+    else:
+        festival = ""
+    return festival
