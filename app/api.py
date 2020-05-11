@@ -24,5 +24,17 @@ def signup():
         return jsonify(msg=message, username=username, password=password)
 
 
+@app.route('/user/login/', methods=['POST'])
+def login():
+    if request.method == 'POST':
+        username = request.args.get('username')
+        password = request.args.get('password')
+        message, token = db.query(username, password)
+        if token == '':
+            return jsonify(msg=message, username=username)
+        else:
+            return jsonify(msg=message, username=username, token=token)
+
+
 if __name__ == '__main__':
     app.run()
