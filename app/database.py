@@ -1,8 +1,7 @@
 import sqlite3 as sql
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask import request, jsonify, current_app
 
-# 在实现基础功能
+# 在utilit里实现基础功能
 import utilit as ut
 
 
@@ -44,6 +43,9 @@ def insert(username, password):
 
 
 def query(username, password):
+    '''
+    登陆，用数据库中加密过的密码验证用户输入的密码是否正确
+    '''
     try:
         with sql.connect("api.db") as con:
             cur = con.cursor()
@@ -65,6 +67,9 @@ def query(username, password):
 
 
 def query_login(username):
+    '''
+    查询用户是否登陆
+    '''
     try:
         with sql.connect("api.db") as con:
             cur = con.cursor()
