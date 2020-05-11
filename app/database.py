@@ -62,3 +62,20 @@ def query(username, password):
         token = ''
         con.close()
         return msg, token
+
+
+def query_login(username):
+    try:
+        with sql.connect("api.db") as con:
+            cur = con.cursor()
+            cursor = cur.execute("select * from user")
+            con.commit()
+    except BaseException:
+        con.rollback()
+    finally:
+        for row in cursor:
+            if username == row[0]:
+                con.close()
+                return username
+        con.close()
+        return None
