@@ -52,7 +52,7 @@ def login_required(view_func):
 
 
 def festival(date):
-    if re.match(r"\d{4}[-/]\d{2}[-/]\d{2}",date):
+    if re.match(r"\d{4}[-/]\d{2}[-/]\d{2}", date):
         if date[-5:] == "01-01":
             festival = "元旦"
         elif date[-5:] == "12-25":
