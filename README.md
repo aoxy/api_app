@@ -46,13 +46,22 @@ git clone https://github.com/aoxy/api_app.git
 ## 3. 安装依赖
 
 ```bash
+cd api_app/
 pip install -r requirements.txt
 ```
 
 ## 4. 启动项目
 
-```bash
+* Windows上：
+
+```powershell
 python .\app\api.py
+```
+
+* Linux/Mac OS上：
+
+```bash
+python ./app/api.py
 ```
 
 ---
@@ -67,3 +76,5 @@ python .\app\api.py
  * Debug mode: off
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
 ```
+
+这里的地址是<http://127.0.0.1:5000/>，接口文档中的地址与这里实际显示的为准。
