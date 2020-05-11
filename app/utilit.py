@@ -38,8 +38,10 @@ def login_required(view_func):
     def verify_token(*args, **kwargs):
         try:
             token = request.args.get('token')
+            if token is None:
+                return jsonify(msg='缺少参数token！')
         except Exception:
-            return jsonify(msg='缺少参数token！')
+            return jsonify(msg='发生未知错误!')
         s = Serializer(current_app.config["SECRET_KEY"])
         try:
             s.loads(token)
